@@ -12,63 +12,59 @@ const Career = () => {
           <div className="career-timeline">
             <div className="career-dot"></div>
           </div>
+          
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Co-Founder</h4>
-                <h5>CallHQ.ai</h5>
+                <h4>Production Engineering Support</h4>
+                <h5>Linamar Corporation · Windsor, ON</h5>
               </div>
-              <h3>NOW</h3>
+              <h3>2025–26</h3>
             </div>
             <p>
-              Building CallHQ.ai, a voice AI platform for
-              automating customer calls, support, and conversions.
+              Operated high-precision automated manufacturing systems and collaborated with cross-functional teams to resolve quality issues in automotive components. Conducted precision leak testing, failure analysis, and supported continuous improvement initiatives.
             </p>
           </div>
+
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Adobe</h4>
-                <h5>6+ years · Noida</h5>
+                <h4>MEng Researcher</h4>
+                <h5>University of Windsor · Windsor, ON</h5>
               </div>
-              <h3>2017–24</h3>
+              <h3>2025–26</h3>
             </div>
             <p>
-              Senior Lead Software Engineer (Feb 2024 – May 2024). Lead Software
-              Engineer (Feb 2021 – Feb 2024). Software Engineer II (Dec 2017 –
-              Feb 2021): internationalization, globalization, and localization for
-              Adobe Technical Communication Suite; functional and linguistic testing
-              strategy; in-house tooling; collaboration with product and engineering
-              for high-quality localized releases.
+              Designed adaptive Battery Management System (BMS) control algorithms using a co-simulation approach. Developed MATLAB/Simulink models and Python scripts for real-time battery dynamics, model validation, and performance metric analysis.
             </p>
           </div>
+
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Consultant</h4>
-                <h5>Genpact Headstrong </h5>
+                <h4>Service Engineer</h4>
+                <h5>Malvern Panalytical · Gujarat, India</h5>
               </div>
-              <h3>2016–17</h3>
+              <h3>2021–24</h3>
             </div>
             <p>
-              Sep 2016 – Nov 2017. Developed and maintained WCF services consumed
-              by the UI; deployment support across environments; NUnit tests and
-              coverage; bug fixes from QA and users; database work.
+              Executed commissioning and validation protocols for analytical equipment across 270+ sites. Ensured FDA, ISO, and 21 CFR Part 11 compliance, and worked extensively with CAN bus communication protocols and embedded firmware updates.
             </p>
           </div>
+
           <div className="career-info-box">
             <div className="career-info-in">
               <div className="career-role">
-                <h4>Sf Engineer</h4>
-                <h5>Infogain</h5>
+                <h4>EV R&D Capstone</h4>
+                <h5>Charotar University · India</h5>
               </div>
-              <h3>2013-16</h3>
+              <h3>2020–21</h3>
             </div>
             <p>
-              Software engineering across enterprise projects, contributing to
-              design, development, and delivery of business applications.
+              Designed battery pack architecture with thermal and electrical integration for an EV platform. Developed a Hardware-in-the-Loop (HIL) test framework and configured CAN bus communication between battery management and motor controllers.
             </p>
           </div>
+
         </div>
       </div>
     </div>

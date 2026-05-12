@@ -21,52 +21,69 @@ const Navbar = () => {
     });
 
     smoother.scrollTop(0);
-    smoother.paused(true);
+    // Note: Assuming `smoother.paused(false)` is called in your Loading/initialFX script!
+    smoother.paused(true); 
 
-    let links = document.querySelectorAll(".header ul a");
-    links.forEach((elem) => {
-      let element = elem as HTMLAnchorElement;
-      element.addEventListener("click", (e) => {
-        if (window.innerWidth > 1024) {
-          e.preventDefault();
-          let elem = e.currentTarget as HTMLAnchorElement;
-          let section = elem.getAttribute("data-href");
-          smoother.scrollTo(section, true, "top top");
-        }
-      });
-    });
-    window.addEventListener("resize", () => {
+    const handleResize = () => {
       ScrollSmoother.refresh(true);
-    });
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // CLEANUP: Prevent memory leaks and duplicate GSAP instances
+    return () => {
+      window.removeEventListener("resize", handleResize);
+      if (smoother) smoother.kill();
+    };
   }, []);
+
+  // React-idiomatic way to handle the click routing
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, target: string) => {
+    if (window.innerWidth > 1024 && smoother) {
+      e.preventDefault();
+      smoother.scrollTo(target, true, "top top");
+    }
+  };
+
   return (
     <>
       <div className="header">
+        {/* Updated Initials */}
         <a href="/#" className="navbar-title" data-cursor="disable">
-          AM
+          SD
         </a>
+        {/* Updated LinkedIn info */}
         <a
-          href="https://www.linkedin.com/in/akashrmalhotra/"
+          href="https://www.linkedin.com/in/shivrajdave/"
           className="navbar-connect"
           data-cursor="disable"
           target="_blank"
           rel="noreferrer"
         >
-          linkedin.com/in/akashrmalhotra
+          linkedin.com/in/shivrajdave
         </a>
         <ul>
           <li>
-            <a data-href="#about" href="#about">
+            <a 
+              href="#about" 
+              onClick={(e) => handleSmoothScroll(e, "#about")}
+            >
               <HoverLinks text="ABOUT" />
             </a>
           </li>
           <li>
-            <a data-href="#work" href="#work">
+            <a 
+              href="#work" 
+              onClick={(e) => handleSmoothScroll(e, "#work")}
+            >
               <HoverLinks text="WORK" />
             </a>
           </li>
           <li>
-            <a data-href="#contact" href="#contact">
+            <a 
+              href="#contact" 
+              onClick={(e) => handleSmoothScroll(e, "#contact")}
+            >
               <HoverLinks text="CONTACT" />
             </a>
           </li>

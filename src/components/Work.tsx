@@ -3,34 +3,35 @@ import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
+// Updated with your actual engineering, deep learning, and web projects
 const projects = [
   {
-    title: "CallHQ",
-    category: "Voice AI Calling Platform",
-    tools: "Voice AI, Calling Automation, CRM Integrations",
-    image: "/images/callhq.png",
-    link: "https://callhq.ai",
+    title: "Adaptive BMS Control",
+    category: "Co-Simulation & Control Logic",
+    tools: "MATLAB/Simulink, Python, Real-Time Battery Dynamics",
+    image: "/images/bms-project.png", // Make sure to add relevant images to your public/images folder
+    link: "https://github.com/YOUR_GITHUB_HANDLE", // Update with your actual repo or report link
   },
   {
-    title: "Whatsapp Automation",
-    category: "WABA Application",
-    tools: "WhatsApp Business API, Workflow Automation, Notifications",
-    image: "/images/whatsapp.png",
-    link: "https://whatsapp.callhq.ai",
+    title: "Medical Image Processing",
+    category: "Deep Learning Architectures",
+    tools: "Python, U-Net, Neural Network Optimization, MRI Data",
+    image: "/images/unet-mri.png",
+    link: "https://github.com/YOUR_GITHUB_HANDLE",
   },
   {
-    title: "Broki",
-    category: "Real Estate Platform for FnB Industry",
-    tools: "Property Discovery, Lead Management, Marketplace Workflows",
-    image: "/images/broki.png",
-    link: "https://broki.in",
+    title: "EV Powertrain Architecture",
+    category: "Hardware-in-the-Loop Validation",
+    tools: "CAN Bus, ECU Integration, Thermal Modeling",
+    image: "/images/ev-powertrain.png",
+    link: "https://github.com/YOUR_GITHUB_HANDLE",
   },
   {
-    title: "Orrdr.com",
-    category: "Ecommerce Platform and Mobile App",
-    tools: "Ecommerce, Mobile Experience, Order Management",
-    image: "/images/orrdr.png",
-    link: "https://orrdr.com",
+    title: "Interactive Portfolio",
+    category: "Front-End Web Development",
+    tools: "React.js, Three.js (3D Physics), GSAP Animations",
+    image: "/images/portfolio.png",
+    link: "https://github.com/YOUR_GITHUB_HANDLE",
   },
 ];
 
@@ -130,8 +131,9 @@ const Work = () => {
             {projects.map((_, index) => (
               <button
                 key={index}
-                className={`carousel-dot ${index === currentIndex ? "carousel-dot-active" : ""
-                  }`}
+                className={`carousel-dot ${
+                  index === currentIndex ? "carousel-dot-active" : ""
+                }`}
                 onClick={() => goToSlide(index)}
                 aria-label={`Go to project ${index + 1}`}
                 data-cursor="disable"

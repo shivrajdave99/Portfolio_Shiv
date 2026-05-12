@@ -13,21 +13,34 @@ import setSplitText from "./utils/splitText";
 const TechStack = lazy(() => import("./TechStack"));
 
 const MainContainer = ({ children }: PropsWithChildren) => {
+  // Added SSR safety check just in case
   const [isDesktopView, setIsDesktopView] = useState<boolean>(
-    window.innerWidth > 1024
+    typeof window !== "undefined" ? window.innerWidth > 1024 : true
   );
 
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const resizeHandler = () => {
-      setSplitText();
-      setIsDesktopView(window.innerWidth > 1024);
+      // Debouncing prevents setSplitText from thrashing the DOM 60x a second
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        setSplitText();
+        setIsDesktopView(window.innerWidth > 1024);
+      }, 150); 
     };
-    resizeHandler();
+
+    // Initialize split text on first mount
+    setSplitText();
+
     window.addEventListener("resize", resizeHandler);
+    
+    // Cleanup function
     return () => {
       window.removeEventListener("resize", resizeHandler);
+      clearTimeout(timeoutId);
     };
-  }, [isDesktopView]);
+  }, []); // <-- Empty array ensures this only runs once on mount
 
   return (
     <div className="container-main">

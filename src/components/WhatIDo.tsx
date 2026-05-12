@@ -1,29 +1,34 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import "./styles/WhatIDo.css";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const WhatIDo = () => {
-  const containerRef = useRef<(HTMLDivElement | null)[]>([]);
-  const setRef = (el: HTMLDivElement | null, index: number) => {
-    containerRef.current[index] = el;
-  };
+  const [isTouch, setIsTouch] = useState(false);
+  const [activeIndex, setActiveIndex] = useState<number | null>(null);
+
   useEffect(() => {
-    if (ScrollTrigger.isTouch) {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.classList.remove("what-noTouch");
-          container.addEventListener("click", () => handleClick(container));
-        }
-      });
+    // Safely check for touch devices once the component mounts
+    if (ScrollTrigger.isTouch === 1 || "ontouchstart" in window) {
+      setIsTouch(true);
     }
-    return () => {
-      containerRef.current.forEach((container) => {
-        if (container) {
-          container.removeEventListener("click", () => handleClick(container));
-        }
-      });
-    };
   }, []);
+
+  const handleCardClick = (index: number) => {
+    if (isTouch) {
+      // Toggle the active card. If it's already active, close it (set to null)
+      setActiveIndex((prev) => (prev === index ? null : index));
+    }
+  };
+
+  // Helper function to dynamically assign classes based on React State
+  const getCardClasses = (index: number) => {
+    let classes = "what-content";
+    if (!isTouch) classes += " what-noTouch";
+    if (activeIndex === index) classes += " what-content-active";
+    if (activeIndex !== null && activeIndex !== index) classes += " what-sibling";
+    return classes;
+  };
+
   return (
     <div className="whatIDO">
       <div className="what-box">
@@ -58,9 +63,11 @@ const WhatIDo = () => {
               />
             </svg>
           </div>
+
+          {/* CARD 1: Hardware & Embedded Systems */}
           <div
-            className="what-content what-noTouch"
-            ref={(el) => setRef(el, 0)}
+            className={getCardClasses(0)}
+            onClick={() => handleCardClick(0)}
           >
             <div className="what-border1">
               <svg height="100%">
@@ -87,27 +94,30 @@ const WhatIDo = () => {
             <div className="what-corner"></div>
 
             <div className="what-content-in">
-              <h3>AI & AUTOMATION</h3>
-              <h4>Workflow Intelligence for Organizations</h4>
+              <h3>HARDWARE & CONTROLS</h3>
+              <h4>Embedded Systems & Validation</h4>
               <p>
-                AI specialist helping organizations automate workflows—internal ops
-                and customer-facing—so teams ship faster with less manual work.
+                I design, test, and validate complex physical systems. From Battery 
+                Management Systems (BMS) for hybrid electric vehicles to precision 
+                instrumentation calibration in FDA/ISO regulated environments.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">LLMs &amp; agents</div>
-                <div className="what-tags">Workflow design</div>
-                <div className="what-tags">RAG &amp; retrieval</div>
-                <div className="what-tags">Evals &amp; guardrails</div>
-                <div className="what-tags">Integrations</div>
-                <div className="what-tags">Product strategy</div>
+                <div className="what-tags">HIL Testing</div>
+                <div className="what-tags">CAN Bus Protocols</div>
+                <div className="what-tags">BMS Architecture</div>
+                <div className="what-tags">PLC Programming</div>
+                <div className="what-tags">Control Logic</div>
+                <div className="what-tags">Manufacturing Ops</div>
               </div>
               <div className="what-arrow"></div>
             </div>
           </div>
+
+          {/* CARD 2: Software & Web */}
           <div
-            className="what-content what-noTouch"
-            ref={(el) => setRef(el, 1)}
+            className={getCardClasses(1)}
+            onClick={() => handleCardClick(1)}
           >
             <div className="what-border1">
               <svg height="100%">
@@ -123,22 +133,24 @@ const WhatIDo = () => {
               </svg>
             </div>
             <div className="what-corner"></div>
+            
             <div className="what-content-in">
-              <h3>BUILD &amp; SCALE</h3>
-              <h4>Shipping AI in Production</h4>
+              <h3>SOFTWARE & SIMULATION</h3>
+              <h4>Modeling to Full-Stack</h4>
               <p>
-                I build the systems behind it: APIs, data, voice/real-time, and
-                full-stack products—production-ready, not slide decks.
+                I bridge the gap between engineering logic and user experiences. 
+                Whether I am co-simulating real-time battery dynamics or building 
+                responsive web applications, I take technical projects from data 
+                analysis to production.
               </p>
               <h5>Skillset & tools</h5>
               <div className="what-content-flex">
-                <div className="what-tags">Node.js</div>
                 <div className="what-tags">Python</div>
-                <div className="what-tags">REST &amp; real-time APIs</div>
-                <div className="what-tags">PostgreSQL</div>
-                <div className="what-tags">MongoDB</div>
-                <div className="what-tags">React</div>
-                <div className="what-tags">Cloud &amp; infra</div>
+                <div className="what-tags">MATLAB & Simulink</div>
+                <div className="what-tags">Deep Learning (U-Net)</div>
+                <div className="what-tags">Data Acquisition</div>
+                <div className="what-tags">React.js</div>
+                <div className="what-tags">Web Development</div>
               </div>
               <div className="what-arrow"></div>
             </div>
@@ -150,18 +162,3 @@ const WhatIDo = () => {
 };
 
 export default WhatIDo;
-
-function handleClick(container: HTMLDivElement) {
-  container.classList.toggle("what-content-active");
-  container.classList.remove("what-sibling");
-  if (container.parentElement) {
-    const siblings = Array.from(container.parentElement.children);
-
-    siblings.forEach((sibling) => {
-      if (sibling !== container) {
-        sibling.classList.remove("what-content-active");
-        sibling.classList.toggle("what-sibling");
-      }
-    });
-  }
-}

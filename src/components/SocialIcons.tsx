@@ -2,7 +2,7 @@ import {
   FaGithub,
   FaInstagram,
   FaLinkedinIn,
-  FaYoutube,
+  FaEnvelope,
 } from "react-icons/fa6";
 import "./styles/SocialIcons.css";
 import { TbNotes } from "react-icons/tb";
@@ -12,16 +12,22 @@ import HoverLinks from "./HoverLinks";
 const SocialIcons = () => {
   useEffect(() => {
     const social = document.getElementById("social") as HTMLElement;
+    if (!social) return;
 
-    social.querySelectorAll("span").forEach((item) => {
+    const spans = social.querySelectorAll("span");
+    // Array to hold all cleanup functions so we can execute them on unmount
+    const cleanups: (() => void)[] = [];
+
+    spans.forEach((item) => {
       const elem = item as HTMLElement;
       const link = elem.querySelector("a") as HTMLElement;
+      if (!link) return;
 
-      const rect = elem.getBoundingClientRect();
-      let mouseX = rect.width / 2;
-      let mouseY = rect.height / 2;
+      let mouseX = 25; // default center approx
+      let mouseY = 25;
       let currentX = 0;
       let currentY = 0;
+      let animationFrameId: number;
 
       const updatePosition = () => {
         currentX += (mouseX - currentX) * 0.1;
@@ -30,10 +36,12 @@ const SocialIcons = () => {
         link.style.setProperty("--siLeft", `${currentX}px`);
         link.style.setProperty("--siTop", `${currentY}px`);
 
-        requestAnimationFrame(updatePosition);
+        animationFrameId = requestAnimationFrame(updatePosition);
       };
 
       const onMouseMove = (e: MouseEvent) => {
+        // Calculate dynamically to avoid bugs when scrolling or resizing
+        const rect = elem.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
 
@@ -47,13 +55,19 @@ const SocialIcons = () => {
       };
 
       document.addEventListener("mousemove", onMouseMove);
+      animationFrameId = requestAnimationFrame(updatePosition);
 
-      updatePosition();
-
-      return () => {
-        elem.removeEventListener("mousemove", onMouseMove);
-      };
+      // Push the cleanup logic for this specific icon into our array
+      cleanups.push(() => {
+        document.removeEventListener("mousemove", onMouseMove);
+        cancelAnimationFrame(animationFrameId);
+      });
     });
+
+    // CRITICAL: Proper React cleanup execution
+    return () => {
+      cleanups.forEach((cleanup) => cleanup());
+    };
   }, []);
 
   return (
@@ -61,36 +75,40 @@ const SocialIcons = () => {
       <div className="social-icons" data-cursor="icons" id="social">
         <span>
           <a
-            href="https://github.com/akashrmalhotra"
+            href="https://github.com/YOUR_GITHUB_HANDLE"
             target="_blank"
             rel="noreferrer"
+            aria-label="GitHub"
           >
             <FaGithub />
           </a>
         </span>
         <span>
           <a
-            href="https://www.linkedin.com/in/akashrmalhotra/"
+            href="https://www.linkedin.com/in/shivrajdave/"
             target="_blank"
             rel="noreferrer"
+            aria-label="LinkedIn"
           >
             <FaLinkedinIn />
           </a>
         </span>
         <span>
           <a
-            href="https://www.youtube.com/@Leftbraincoder"
+            href="mailto:shivrajdave99@gmail.com"
             target="_blank"
             rel="noreferrer"
+            aria-label="Email"
           >
-            <FaYoutube />
+            <FaEnvelope />
           </a>
         </span>
         <span>
           <a
-            href="https://www.instagram.com/leftbraincoder/"
+            href="https://www.instagram.com/shivraj_dave/"
             target="_blank"
             rel="noreferrer"
+            aria-label="Instagram"
           >
             <FaInstagram />
           </a>
@@ -98,7 +116,7 @@ const SocialIcons = () => {
       </div>
       <a
         className="resume-button"
-        href="/Akash_Malhotra.pdf"
+        href="/Shivraj_Dave_Resume.pdf"
         target="_blank"
         rel="noreferrer"
       >

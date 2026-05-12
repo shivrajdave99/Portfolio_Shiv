@@ -11,27 +11,32 @@ const Contact = () => {
             <h4>Connect</h4>
             <p>
               <a
-                href="https://www.linkedin.com/in/akashrmalhotra/"
-                target="_blank"
-                rel="noreferrer"
+                href="mailto:shivrajdave99@gmail.com"
                 data-cursor="disable"
               >
-                LinkedIn — akashrmalhotra
+                Email — shivrajdave99@gmail.com
+              </a>
+            </p>
+            <p>
+              <a
+                href="tel:+14376961901"
+                data-cursor="disable"
+              >
+                Phone — 437-696-1901
               </a>
             </p>
             <h4>Education</h4>
             <p>
-              PGPWE (MBA), Indian Institute of Management, Lucknow — 2021–2023
+              MEng in Electrical and Computer Engineering, University of Windsor — 2025–2026
             </p>
             <p>
-              B.Tech Computer Science, Manav Rachna Educational Institutions —
-              2009–2013
+              B.Tech in Electrical Engineering, Charotar University of Science and Technology — 2017–2021
             </p>
           </div>
           <div className="contact-box">
             <h4>Social</h4>
             <a
-              href="https://github.com/akashrmalhotra"
+              href="https://github.com/YOUR_GITHUB_HANDLE"
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
@@ -40,7 +45,7 @@ const Contact = () => {
               GitHub <MdArrowOutward />
             </a>
             <a
-              href="https://www.linkedin.com/in/akashrmalhotra/"
+              href="https://www.linkedin.com/in/shivrajdave/"
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
@@ -49,16 +54,7 @@ const Contact = () => {
               LinkedIn <MdArrowOutward />
             </a>
             <a
-              href="https://www.youtube.com/@Leftbraincoder"
-              target="_blank"
-              rel="noreferrer"
-              data-cursor="disable"
-              className="contact-social"
-            >
-              YouTube <MdArrowOutward />
-            </a>
-            <a
-              href="https://www.instagram.com/leftbraincoder/"
+              href="https://www.instagram.com/shivraj_dave/"
               target="_blank"
               rel="noreferrer"
               data-cursor="disable"
@@ -69,7 +65,7 @@ const Contact = () => {
           </div>
           <div className="contact-box">
             <h2>
-              Designed and Developed <br /> by <span>Akash Malhotra</span>
+              Designed and Developed <br /> by <span>Shivraj Dave</span>
             </h2>
             <h5>
               <MdCopyright /> 2026

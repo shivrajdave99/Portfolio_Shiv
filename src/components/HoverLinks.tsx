@@ -1,10 +1,17 @@
 import "./styles/style.css";
 
-const HoverLinks = ({ text, cursor }: { text: string; cursor?: boolean }) => {
+interface HoverLinksProps {
+  text: string;
+  cursor?: boolean;
+}
+
+const HoverLinks = ({ text, cursor }: HoverLinksProps) => {
   return (
-    <div className="hover-link" data-cursor={!cursor && `disable`}>
+    // Use undefined so the attribute is entirely removed if cursor is true
+    <div className="hover-link" data-cursor={!cursor ? "disable" : undefined}>
       <div className="hover-in">
-        {text} <div>{text}</div>
+        {text} 
+        <div>{text}</div>
       </div>
     </div>
   );
