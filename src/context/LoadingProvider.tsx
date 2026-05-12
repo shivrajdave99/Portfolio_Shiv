@@ -2,7 +2,6 @@ import {
   createContext,
   PropsWithChildren,
   useContext,
-  useEffect,
   useState,
 } from "react";
 import Loading from "../components/Loading";
@@ -19,16 +18,21 @@ export const LoadingProvider = ({ children }: PropsWithChildren) => {
   const [isLoading, setIsLoading] = useState(true);
   const [loading, setLoading] = useState(0);
 
-  const value = {
+  // Strongly type the value object directly
+  const value: LoadingType = {
     isLoading,
     setIsLoading,
     setLoading,
   };
-  useEffect(() => {}, [loading]);
 
   return (
-    <LoadingContext.Provider value={value as LoadingType}>
+    <LoadingContext.Provider value={value}>
+      {/* 
+        Assuming your Loading component has fixed/absolute positioning and a high z-index 
+        to cover the screen. Otherwise, you might want to conditionally hide <main> 
+      */}
       {isLoading && <Loading percent={loading} />}
+      
       <main className="main-body">{children}</main>
     </LoadingContext.Provider>
   );
