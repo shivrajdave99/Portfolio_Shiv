@@ -16,14 +16,13 @@ const textureLoader = new THREE.TextureLoader();
 // Updated to reflect your hardware, control systems, and web expertise.
 // IMPORTANT: Ensure these files exist in your public/images directory!
 const imageUrls = [
-  "/images/python.webp",
-  "/images/matlab.webp",
-  "/images/simulink.webp",
-  "/images/autocad.webp",
-  "/images/react.webp",
-  "/images/github.webp",
-  "/images/cplusplus.webp", 
-  "/images/plc.webp", 
+  "/images/PYTHONLOGO.png",
+  "/images/MATLAB.png",
+  "/images/SIMULATIONLOGO.png",
+  "/images/AUTOCAD.png",
+  "/images/REVIT.png",
+  "/images/ELECTRICALCIRCUIT.png",
+  "/images/COLAB.png"
 ];
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
