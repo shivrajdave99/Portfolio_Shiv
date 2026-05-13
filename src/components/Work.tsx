@@ -16,7 +16,7 @@ const projects = [
     title: "Medical Image Processing",
     category: "Deep Learning Architectures",
     tools: "Python, U-Net, Neural Network Optimization, MRI Data",
-    image: "/images/unet-mri.png",
+    image: "./images/PYTHONLOGO.png", 
     link: "https://github.com/YOUR_GITHUB_HANDLE",
   },
   {

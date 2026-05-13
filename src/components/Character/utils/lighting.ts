@@ -18,9 +18,11 @@ const setLighting = (scene: THREE.Scene) => {
   pointLight.castShadow = true;
   scene.add(pointLight);
 
-  // FIX: Change "/models/" to "./models/" to support GitHub Pages sub-directories
+  // We pull the base path dynamically from your Vite config
+  const basePath = import.meta.env.BASE_URL;
+
   new RGBELoader()
-    .setPath("./models/") 
+    .setPath(`${basePath}models/`) 
     .load("char_enviorment.hdr?v=2", function (texture) {
       texture.mapping = THREE.EquirectangularReflectionMapping;
       scene.environment = texture;
@@ -37,7 +39,6 @@ const setLighting = (scene: THREE.Scene) => {
   }
   const duration = 2;
   const ease = "power2.inOut";
-  
   function turnOnLights() {
     gsap.to(scene, {
       environmentIntensity: 0.64,

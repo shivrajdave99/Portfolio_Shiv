@@ -11,16 +11,19 @@ const setCharacter = (
   const loader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
   
-  // FIX 1: Change "/draco/" to "./draco/"
-  dracoLoader.setDecoderPath("./draco/");
+  // Define the base path for assets
+  const basePath = import.meta.env.BASE_URL;
+
+  // Fix the decoder path
+  dracoLoader.setDecoderPath(`${basePath}draco/`);
   loader.setDRACOLoader(dracoLoader);
 
   const loadCharacter = () => {
     return new Promise<GLTF | null>(async (resolve, reject) => {
       try {
-        // FIX 2: Change "/models/..." to "./models/..."
+        // Fix the encrypted model path
         const encryptedBlob = await decryptFile(
-          "./models/character.enc?v=2",
+          `${basePath}models/character.enc?v=2`,
           "MyCharacter12"
         );
         const blobUrl = URL.createObjectURL(new Blob([encryptedBlob]));
@@ -35,9 +38,8 @@ const setCharacter = (
               if (child.isMesh) {
                 const mesh = child as THREE.Mesh;
 
-                // Change clothing colors to match site theme
                 if (mesh.material) {
-                  if (mesh.name === "BODY.SHIRT") { // The shirt mesh
+                  if (mesh.name === "BODY.SHIRT") { 
                     const newMat = (mesh.material as THREE.Material).clone() as THREE.MeshStandardMaterial;
                     newMat.color = new THREE.Color("#8B4513");
                     mesh.material = newMat;
@@ -56,8 +58,12 @@ const setCharacter = (
             resolve(gltf);
             setCharTimeline(character, camera);
             setAllTimeline();
-            character!.getObjectByName("footR")!.position.y = 3.36;
-            character!.getObjectByName("footL")!.position.y = 3.36;
+            
+            // Checking existence before accessing position to avoid crashes
+            const footR = character.getObjectByName("footR");
+            const footL = character.getObjectByName("footL");
+            if (footR) footR.position.y = 3.36;
+            if (footL) footL.position.y = 3.36;
 
             dracoLoader.dispose();
           },
