@@ -10,14 +10,17 @@ const setCharacter = (
 ) => {
   const loader = new GLTFLoader();
   const dracoLoader = new DRACOLoader();
-  dracoLoader.setDecoderPath("/draco/");
+  
+  // FIX 1: Change "/draco/" to "./draco/"
+  dracoLoader.setDecoderPath("./draco/");
   loader.setDRACOLoader(dracoLoader);
 
   const loadCharacter = () => {
     return new Promise<GLTF | null>(async (resolve, reject) => {
       try {
+        // FIX 2: Change "/models/..." to "./models/..."
         const encryptedBlob = await decryptFile(
-          "/models/character.enc?v=2",
+          "./models/character.enc?v=2",
           "MyCharacter12"
         );
         const blobUrl = URL.createObjectURL(new Blob([encryptedBlob]));
@@ -55,8 +58,6 @@ const setCharacter = (
             setAllTimeline();
             character!.getObjectByName("footR")!.position.y = 3.36;
             character!.getObjectByName("footL")!.position.y = 3.36;
-
-            // Monitor scale is handled by GsapScroll.ts animations
 
             dracoLoader.dispose();
           },
