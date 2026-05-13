@@ -3,34 +3,37 @@ import "./styles/Work.css";
 import WorkImage from "./WorkImage";
 import { MdArrowBack, MdArrowForward } from "react-icons/md";
 
-// Updated with your actual engineering, deep learning, and web projects
+// Dynamically grab the GitHub Pages sub-folder path
+const basePath = import.meta.env.BASE_URL;
+
+// Updated with placeholder images that actually exist in your public folder
 const projects = [
   {
     title: "Adaptive BMS Control",
     category: "Co-Simulation & Control Logic",
     tools: "MATLAB/Simulink, Python, Real-Time Battery Dynamics",
-    image: "/images/bms-project.png", // Make sure to add relevant images to your public/images folder
-    link: "https://github.com/YOUR_GITHUB_HANDLE", // Update with your actual repo or report link
+    image: `${basePath}images/SIMULATIONLOGO.png`, // Using simulation logo as placeholder
+    link: "https://github.com/YOUR_GITHUB_HANDLE",
   },
   {
     title: "Medical Image Processing",
     category: "Deep Learning Architectures",
     tools: "Python, U-Net, Neural Network Optimization, MRI Data",
-    image: "./images/PYTHONLOGO.png", 
+    image: `${basePath}images/PYTHONLOGO.png`, // Using python logo
     link: "https://github.com/YOUR_GITHUB_HANDLE",
   },
   {
     title: "EV Powertrain Architecture",
     category: "Hardware-in-the-Loop Validation",
     tools: "CAN Bus, ECU Integration, Thermal Modeling",
-    image: "/images/ev-powertrain.png",
+    image: `${basePath}images/ELECTRICALCIRCUIT.png`, // Using circuit logo as placeholder
     link: "https://github.com/YOUR_GITHUB_HANDLE",
   },
   {
     title: "Interactive Portfolio",
     category: "Front-End Web Development",
     tools: "React.js, Three.js (3D Physics), GSAP Animations",
-    image: "/images/portfolio.png",
+    image: `${basePath}images/COLAB.png`, // Using colab logo as placeholder
     link: "https://github.com/YOUR_GITHUB_HANDLE",
   },
 ];

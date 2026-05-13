@@ -13,17 +13,20 @@ import {
 
 const textureLoader = new THREE.TextureLoader();
 
-// Updated to reflect your hardware, control systems, and web expertise.
-// IMPORTANT: Ensure these files exist in your public/images directory!
+// FIX 1: Grab the base path for your GitHub Pages sub-folder
+const basePath = import.meta.env.BASE_URL;
+
+// FIX 2: Update image paths to use the basePath
 const imageUrls = [
-  "/images/PYTHONLOGO.png",
-  "/images/MATLAB.png",
-  "/images/SIMULATIONLOGO.png",
-  "/images/AUTOCAD.png",
-  "/images/REVIT.png",
-  "/images/ELECTRICALCIRCUIT.png",
-  "/images/COLAB.png"
+  `${basePath}images/PYTHONLOGO.png`,
+  `${basePath}images/MATLAB.png`,
+  `${basePath}images/SIMULATIONLOGO.png`,
+  `${basePath}images/AUTOCAD.png`,
+  `${basePath}images/REVIT.png`,
+  `${basePath}images/ELECTRICALCIRCUIT.png`,
+  `${basePath}images/COLAB.png`
 ];
+
 const textures = imageUrls.map((url) => textureLoader.load(url));
 
 const sphereGeometry = new THREE.SphereGeometry(1, 28, 28);
@@ -131,10 +134,8 @@ const TechStack = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // CLEAN APPROACH: Use IntersectionObserver instead of scrolling hacks
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Activates the physics when at least 10% of the canvas is visible
         setIsActive(entry.isIntersecting);
       },
       { threshold: 0.1 }
@@ -198,11 +199,14 @@ const TechStack = () => {
             />
           ))}
         </Physics>
+        
+        {/* FIX 3: Update Environment HDR path */}
         <Environment
-          files="/models/char_enviorment.hdr"
+          files={`${basePath}models/char_enviorment.hdr`}
           environmentIntensity={0.5}
           environmentRotation={[0, 4, 2]}
         />
+
         <EffectComposer enableNormalPass={false}>
           <N8AO color="#0f002c" aoRadius={2} intensity={1.15} />
         </EffectComposer>
